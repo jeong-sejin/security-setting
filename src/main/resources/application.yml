@@ -24,7 +24,9 @@ spring:
     livereload:
       enabled: true
   messages:
-    basename: message
+    basename: static/messages/messages
+    encoding: UTF-8
+    alwaysUseMessageFormat: true
 
 image:
   logo: logo.jpg
