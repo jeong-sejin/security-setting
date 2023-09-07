@@ -1,5 +1,6 @@
 package com.todo.securitySetting.config;
 
+import com.todo.securitySetting.Handler.LoginFailHandler;
 import com.todo.securitySetting.Handler.LoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login/login")
                         .defaultSuccessUrl("/main/dashboard")
                         .successHandler(new LoginSuccessHandler())
+                        .failureHandler(new LoginFailHandler())
                         .usernameParameter("userid")
                         .passwordParameter("password")
 

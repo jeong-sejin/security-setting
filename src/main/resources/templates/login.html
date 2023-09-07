@@ -23,8 +23,10 @@
                         <input type="text" id="userid" name="userid" placeholder="User name" class="form-control my-3 login-text" autofocus />
                         <input type="password" placeholder="Password" id="password" name="password" class="form-control mb-3 login-text"/>
 
-                        <div th:if="${param.error}">
-                            <p class="error-message" th:text="${errorMessage}">User Name or Password invalid, please verify</p>
+                        <div th:if="${errMsg}">
+                            <p class="error-message">
+                                [[${errMsg}]]
+                            </p>
                         </div>
                         <button class="btn btn-lg btn-success btn-block text-uppercase" name="Submit" value="Login" type="Submit" th:text="Login">Sign In</button>
                     </form>

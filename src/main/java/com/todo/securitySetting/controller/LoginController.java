@@ -4,6 +4,8 @@ import com.todo.securitySetting.entity.User;
 import com.todo.securitySetting.service.UserService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/login")
@@ -20,13 +23,35 @@ public class LoginController {
     @Resource(name="userService")
     private UserService userService;
 
+    @Autowired
+    MessageSource messageSource;
+
     @GetMapping("/loginForm")
-    public String loginForm(HttpServletRequest request, Model model, Authentication authentication){
+    public String loginForm(@RequestParam(required = false) String errorCode,HttpServletRequest request, Model model, Authentication authentication){
         String uri = request.getHeader("Referer"); //이전 경로
+        String errMsg = null;
+
         //이미 인증된 사용자의 로그인 페이지 접근 방지
         if(authentication!=null) return "duplicateLoginAlert";
         //이전 경로가 로그인 관련 페이지가 아닐 경우에만 저장, 속성값이 null이 되면 오류가 발생하므로 이 경우도 처리한다.
         if(uri!=null && !(uri.contains("/login"))) request.getSession().setAttribute("prevPage", uri);
+
+        if(errorCode != null){
+            if(errorCode.equals("1")){
+                errMsg = messageSource.getMessage("login.errorMessage.1",null,null);
+            }else if(errorCode.equals("2")){
+                errMsg = messageSource.getMessage("login.errorMessage.2",null,null);
+            }else if(errorCode.equals("3")){
+                errMsg = messageSource.getMessage("login.errorMessage.3",null,null);
+            }else if(errorCode.equals("4")){
+                errMsg = messageSource.getMessage("login.errorMessage.4",null,null);
+            }else if(errorCode.equals("5")){
+                errMsg = messageSource.getMessage("login.errorMessage.5",null,null);
+            }
+
+            model.addAttribute("errMsg",errMsg);
+        }
+
         return "login";
     }
 
