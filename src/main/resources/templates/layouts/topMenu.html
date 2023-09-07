@@ -1,0 +1,33 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/login.css" th:href="@{/css/top_menu.css}"/>
+</head>
+
+<body th:fragment="menu">
+    <a href="/dashboard/main" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">
+                <!-- img src="/images/logo.jpg" width="36px" height="auto" onerror="this.style.display='none';"/> -->
+        </span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">
+                <img src="/images/logo.jpg" width="150px" height="50px"/>
+        </span>
+    </a>
+    <a href="#" onclick="javascript:logout()">
+        로그아웃
+    </a>
+    <script>
+        function logout(){
+            let f = document.createElement('form');
+            f.setAttribute('method', 'post');
+            f.setAttribute('action', '/login/logout');
+            document.body.appendChild(f);
+            f.submit();
+        }
+    </script>
+</body>
+
+</html>

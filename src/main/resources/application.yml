@@ -1,0 +1,30 @@
+server.error:
+  include-exception: true
+  include-stacktrace: ALWAYS
+  whitelabel.enabled: true
+
+spring:
+  datasource:
+    url: jdbc:mariadb://10.50.204.12:13306/test
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: kumc
+    password: kumcdb1!
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    check-template-location: true
+    prefix: classpath:/templates/   # .html 파일을 불러오기 위한 경로 설정(src/main/resources/templates)
+    suffix: .html   # 파일 확장자
+    cache: false
+  devtools:
+    livereload:
+      enabled: true
+  messages:
+    basename: message
+
+image:
+  logo: logo.jpg
